@@ -12,8 +12,8 @@
 
   <text class="pinyin" x="258" y="380" text-anchor="middle">d</text>
   <text class="pinyin" x="338" y="380" text-anchor="middle">u</text>
-  <!-- 阳平 ˊ: 缩到横向跨度 31px, 总长 ~44 -->
-  <line x1="323" y1="258" x2="354" y2="226"
+  <!-- 阳平 ˊ: y=280(底) → y=232(顶), 高 48 -->
+  <line x1="323" y1="280" x2="354" y2="232"
         stroke="#D93A2E" stroke-width="20" stroke-linecap="round"/>
 
   <g stroke="#A8A099" stroke-width="2.5" stroke-dasharray="8 10" opacity="0.55">
@@ -28,7 +28,8 @@
   <text class="pinyin" x="658" y="380" text-anchor="middle">x</text>
   <text class="pinyin" x="728" y="380" text-anchor="middle">i</text>
   <text class="pinyin" x="798" y="380" text-anchor="middle">e</text>
-  <path d="M 774 250 Q 798 300 822 250"
+  <!-- 上声 ˇ: 两端 y=232 (顶对齐阳平), 弧底 y=280 (底对齐阳平) -->
+  <path d="M 774 232 Q 798 280 822 232"
         fill="none" stroke="#D93A2E" stroke-width="20"
         stroke-linecap="round"/>
 
