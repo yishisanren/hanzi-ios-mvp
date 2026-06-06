@@ -6,18 +6,14 @@
       .hanzi { font-family: serif; font-size: 420px; font-weight: 800; fill: #141414; }
     </style>
   </defs>
-
-  <!-- 宣纸底（全幅，iOS 会自动圆角 mask） -->
   <rect x="0" y="0" width="1024" height="1024" fill="#F6F1E6"/>
 
-  <!-- ===== 左：dú + 读 ===== -->
   <text class="pinyin" x="252" y="370" text-anchor="middle">d</text>
   <text class="pinyin" x="340" y="370" text-anchor="middle">u</text>
-  <!-- 阳平 ˊ -->
-  <line x1="316" y1="262" x2="365" y2="210"
+  <!-- 阳平 ˊ: 缩到横向跨度 34px, 总长~48 -->
+  <line x1="324" y1="250" x2="358" y2="215"
         stroke="#D93A2E" stroke-width="22" stroke-linecap="round"/>
 
-  <!-- 左米字格 -->
   <g stroke="#A8A099" stroke-width="3" stroke-dasharray="9 11" opacity="0.55">
     <rect x="70" y="470" width="436" height="436" fill="none" stroke="#A8A099" stroke-width="2.5" stroke-dasharray="0"/>
     <line x1="288" y1="470" x2="288" y2="906"/>
@@ -27,16 +23,13 @@
   </g>
   <text class="hanzi" x="288" y="828" text-anchor="middle">读</text>
 
-  <!-- ===== 右：xiě + 写 ===== -->
   <text class="pinyin" x="654" y="370" text-anchor="middle">x</text>
   <text class="pinyin" x="728" y="370" text-anchor="middle">i</text>
   <text class="pinyin" x="804" y="370" text-anchor="middle">e</text>
-  <!-- 上声 ˇ -->
   <path d="M 778 240 Q 804 294 830 240"
         fill="none" stroke="#D93A2E" stroke-width="22"
         stroke-linecap="round"/>
 
-  <!-- 右米字格 -->
   <g stroke="#A8A099" stroke-width="3" stroke-dasharray="9 11" opacity="0.55">
     <rect x="518" y="470" width="436" height="436" fill="none" stroke="#A8A099" stroke-width="2.5" stroke-dasharray="0"/>
     <line x1="736" y1="470" x2="736" y2="906"/>

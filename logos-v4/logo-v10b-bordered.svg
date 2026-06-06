@@ -6,14 +6,14 @@
       .hanzi { font-family: serif; font-size: 380px; font-weight: 800; fill: #141414; }
     </style>
   </defs>
-
   <rect x="0" y="0" width="1024" height="1024" rx="220" ry="220" fill="#F6F1E6"/>
   <rect x="40" y="40" width="944" height="944" rx="200" ry="200"
         fill="none" stroke="#141414" stroke-width="12"/>
 
   <text class="pinyin" x="258" y="380" text-anchor="middle">d</text>
   <text class="pinyin" x="338" y="380" text-anchor="middle">u</text>
-  <line x1="316" y1="270" x2="361" y2="223"
+  <!-- 阳平 ˊ: 缩到横向跨度 31px, 总长 ~44 -->
+  <line x1="323" y1="258" x2="354" y2="226"
         stroke="#D93A2E" stroke-width="20" stroke-linecap="round"/>
 
   <g stroke="#A8A099" stroke-width="2.5" stroke-dasharray="8 10" opacity="0.55">
