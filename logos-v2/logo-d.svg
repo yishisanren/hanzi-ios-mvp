@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!--
+    Direction D: Tone Dot (声点标)
+    Matrix: (具象笔画, 现代科技感)
+    Meta at 60×60: large circle (300px radius → ~18px at 60×60) holds solid shape;
+         tone-mark cutout (40px stroke → ~2.3px) remains as visible negative-space slit.
+    Center element: a single calligraphic 丶 (dot stroke) rendered as a modern geometric circle
+         with a tone-mark (ˇ) negative-space cutout.
+  -->
+
+  <!-- Canvas background: 宣纸白 -->
+  <rect width="1024" height="1024" fill="#F6F1E6"/>
+
+  <!--
+    Main form: the 丶 dot stroke, traditionally a teardrop shape,
+    here abstracted into a pure geometric circle.
+    The circle represents the basic dot stroke — the building block
+    of Chinese calligraphy (永字八法's first stroke).
+  -->
+  <circle cx="512" cy="512" r="300" fill="#141414"/>
+
+  <!--
+    Negative-space cutout: the ˇ (falling-rising) tone mark.
+    Carved out of the solid black circle.
+    The tone mark sits slightly off-center (shifted right and up)
+    for dynamic balance within the circular frame.
+  -->
+  <path d="M 380,510 Q 532,670 684,510"
+        fill="none"
+        stroke="#F6F1E6"
+        stroke-width="44"
+        stroke-linecap="round"/>
+
+  <!--
+    Vermillion accent: a small circle in the upper-right area,
+    like a seal stamp floating beside the main mark.
+    Creates visual tension and guides the eye around the form.
+  -->
+  <circle cx="740" cy="300" r="20" fill="#D93A2E"/>
+
+</svg>

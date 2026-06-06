@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>声笔 ToneStroke · Logo 4 方向对比</title>
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", sans-serif;
+    background: var(--bg-primary);
+    color: var(--ink-primary);
+    margin: 0;
+    padding: 32px 20px 60px;
+  }
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 4px;
+    letter-spacing: 0.5px;
+  }
+  .subtitle {
+    color: var(--ink-tertiary);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .intro {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent-primary);
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 32px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-secondary);
+  }
+  .intro strong { color: var(--ink-primary); }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 720px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+  .card {
+    background: var(--bg-secondary);
+    border-radius: 18px;
+    padding: 22px 22px 20px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .badge {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .card h2 {
+    font-size: 17px;
+    margin: 0;
+    font-weight: 600;
+  }
+  .card h2 .en {
+    color: var(--ink-tertiary);
+    font-weight: 400;
+    font-size: 13px;
+    margin-left: 6px;
+  }
+  .tagline {
+    font-size: 13px;
+    color: var(--ink-secondary);
+    margin: 0 0 14px;
+    line-height: 1.5;
+  }
+  .preview-1024 {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--bg-primary);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--stroke-divider);
+  }
+  .preview-1024 img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .size-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 0;
+    border-top: 1px solid var(--stroke-divider);
+  }
+  .size-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .size-item .img-box {
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .size-item .img-box.large { border-radius: 12px; }
+  .size-item img {
+    display: block;
+    border-radius: 6px;
+  }
+  .size-item.s60 img { width: 30px; height: 30px; border-radius: 6px; }
+  .size-item.s180 img { width: 56px; height: 56px; border-radius: 10px; }
+  .size-item .lbl {
+    font-size: 11px;
+    color: var(--ink-tertiary);
+    letter-spacing: 0.5px;
+  }
+  .verdict {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .pros, .cons {
+    line-height: 1.5;
+  }
+  .pros { color: var(--state-success); }
+  .cons { color: var(--state-error); }
+  .pros li, .cons li {
+    list-style: none;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 3px;
+  }
+  .pros li::before { content: "✓"; position: absolute; left: 0; }
+  .cons li::before { content: "✕"; position: absolute; left: 0; }
+  .score-badge {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: var(--accent-primary);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .score-badge.mid { background: var(--state-warning); }
+  .score-badge.low { background: var(--ink-tertiary); }
+
+  .decision-box {
+    margin-top: 36px;
+    padding: 22px 24px;
+    border: 2px solid var(--accent-primary);
+    border-radius: 16px;
+    background: var(--bg-secondary);
+  }
+  .decision-box h2 {
+    margin: 0 0 12px;
+    font-size: 18px;
+  }
+  .ranking {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+    font-size: 14px;
+  }
+  .ranking-row {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+  }
+  .ranking-row .pos {
+    font-weight: 700;
+    color: var(--accent-primary);
+    min-width: 32px;
+  }
+  .ranking-row .name {
+    font-weight: 600;
+    min-width: 72px;
+  }
+  .ranking-row .reason {
+    color: var(--ink-secondary);
+    flex: 1;
+  }
+  .next-actions {
+    background: var(--bg-primary);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-secondary);
+  }
+  .next-actions strong { color: var(--ink-primary); }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>声笔 ToneStroke · Logo 4 方向</h1>
+  <p class="subtitle">v2 · 2026-06-06 · 候选 A/B/C/D 对比</p>
+
+  <div class="intro">
+    <strong>本轮探索目标</strong>：跳出之前 3 个偏「书法笔触+米字格」的旧方向，从 4 个不同维度提案。
+    <br><br>
+    <strong>设计矩阵</strong>：符号源（拼音字符 / 抽象笔画 / 复合符号 / 抽象点）× 气质光谱（教材规范 → 文人书法 → 现代科技）。
+    <br><br>
+    <strong>品牌锁定</strong>：墨黑 #141414 · 朱砂红 #D93A2E · 宣纸白 #F6F1E6 · 暖灰 #A8A099。
+  </div>
+
+  <div class="grid">
+    <!-- A -->
+    <div class="card">
+      <div class="score-badge">8.0</div>
+      <div class="card-header">
+        <div class="badge">A</div>
+        <h2>声调格<span class="en">Pinyin Tone Grid</span></h2>
+      </div>
+      <p class="tagline">声调弧线 + 拼音四线格 + 朱砂红点。教材规范感，零认知成本。</p>
+      <div class="preview-1024"><img src="../assets/logo/logo-a-1024.png" alt="Logo A"></div>
+      <div class="size-row">
+        <div class="size-item s180"><div class="img-box large"><img src="../assets/logo/logo-a-180.png"></div><span class="lbl">180px · 桌面</span></div>
+        <div class="size-item s60"><div class="img-box"><img src="../assets/logo/logo-a-60.png"></div><span class="lbl">60px · 通知</span></div>
+      </div>
+      <div class="verdict">
+        <ul class="pros"><li>声调一眼识别</li><li>小尺寸最优</li><li>东方极简最忠实</li></ul>
+        <ul class="cons"><li>笔顺隐喻缺席</li></ul>
+      </div>
+    </div>
+
+    <!-- B -->
+    <div class="card">
+      <div class="score-badge mid">7.4</div>
+      <div class="card-header">
+        <div class="badge">B</div>
+        <h2>撇笔弧线<span class="en">Ink Sweep</span></h2>
+      </div>
+      <p class="tagline">飞白毛笔撇 + 朱砂红印起笔点。文人书法气最浓，笔顺隐喻最强。</p>
+      <div class="preview-1024"><img src="../assets/logo/logo-b-1024.png" alt="Logo B"></div>
+      <div class="size-row">
+        <div class="size-item s180"><div class="img-box large"><img src="../assets/logo/logo-b-180.png"></div><span class="lbl">180px · 桌面</span></div>
+        <div class="size-item s60"><div class="img-box"><img src="../assets/logo/logo-b-60.png"></div><span class="lbl">60px · 通知</span></div>
+      </div>
+      <div class="verdict">
+        <ul class="pros"><li>笔顺意境最足</li><li>文化辨识度高</li></ul>
+        <ul class="cons"><li>60px 易糊</li><li>拼音元素缺席</li></ul>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div class="card">
+      <div class="score-badge low">6.5</div>
+      <div class="card-header">
+        <div class="badge">C</div>
+        <h2>TS 交织<span class="en">T+S Monogram</span></h2>
+      </div>
+      <p class="tagline">Tone+Stroke 字母 monogram + 收笔红钩。设计师自洽强、用户辨识弱。</p>
+      <div class="preview-1024"><img src="../assets/logo/logo-c-1024.png" alt="Logo C"></div>
+      <div class="size-row">
+        <div class="size-item s180"><div class="img-box large"><img src="../assets/logo/logo-c-180.png"></div><span class="lbl">180px · 桌面</span></div>
+        <div class="size-item s60"><div class="img-box"><img src="../assets/logo/logo-c-60.png"></div><span class="lbl">60px · 通知</span></div>
+      </div>
+      <div class="verdict">
+        <ul class="pros"><li>品牌资产可扩展</li></ul>
+        <ul class="cons"><li>中文用户难解读</li><li>气质偏 fintech</li><li>小尺寸糊成一团</li></ul>
+      </div>
+    </div>
+
+    <!-- D -->
+    <div class="card">
+      <div class="score-badge mid">7.6</div>
+      <div class="card-header">
+        <div class="badge">D</div>
+        <h2>声点标<span class="en">Tone Dot</span></h2>
+      </div>
+      <p class="tagline">墨团内白色声调弧 + 外角红声点。亲和力强、小尺寸第二好。</p>
+      <div class="preview-1024"><img src="../assets/logo/logo-d-1024.png" alt="Logo D"></div>
+      <div class="size-row">
+        <div class="size-item s180"><div class="img-box large"><img src="../assets/logo/logo-d-180.png"></div><span class="lbl">180px · 桌面</span></div>
+        <div class="size-item s60"><div class="img-box"><img src="../assets/logo/logo-d-60.png"></div><span class="lbl">60px · 通知</span></div>
+      </div>
+      <div class="verdict">
+        <ul class="pros"><li>极小尺寸表现极佳</li><li>亲和力适合家长</li></ul>
+        <ul class="cons"><li>笔顺缺席</li><li>文化感弱</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="decision-box">
+    <h2>🎯 推荐排序与下一步</h2>
+    <div class="ranking">
+      <div class="ranking-row"><span class="pos">#1</span><span class="name">A · 声调格</span><span class="reason">综合最强：声调清晰 + 东方极简 + 小尺寸优。建议在 v2.1 加细虚线笔顺路径补足双核。</span></div>
+      <div class="ranking-row"><span class="pos">#2</span><span class="name">D · 声点标</span><span class="reason">最稳健备选：小尺寸第一，亲和力最强，适合主打家长场景。</span></div>
+      <div class="ranking-row"><span class="pos">#3</span><span class="name">B · 撇笔弧线</span><span class="reason">文化牌最强但小尺寸是硬伤。可考虑作为 Apple Watch / App Store 横版资产。</span></div>
+      <div class="ranking-row"><span class="pos">#4</span><span class="name">C · TS 交织</span><span class="reason">不推荐。中文用户解读成本高，气质偏离汉字学习工具定位。</span></div>
+    </div>
+    <div class="next-actions">
+      <strong>下一步</strong>：回复 <strong>A / B / C / D</strong> 锁定方向。锁定后我会：
+      <br>
+      ① 导出 13 尺寸完整 iOS AppIcon.appiconset
+      ② 替换主页面 demo 的占位 logo
+      ③ 把锁定方向写入 PRD §8 品牌段落（替换"声笔 ToneStroke"的描述）
+      <br>
+      也可以回复<strong>修改建议</strong>，例如：「A 但加笔顺虚线」「D 但圆改成方印」「B 但去掉飞白做极简版」。
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!--
+    Direction B: Ink Sweep (撇笔弧线)
+    Matrix: (具象汉字笔画, 文人书法气)
+    Meta at 60×60: thick organic stroke remains visually dominant; red seal circle is large enough to register.
+    Center element: a single calligraphic 撇-like stroke that simultaneously reads as the rising tone ˊ.
+  -->
+  <defs>
+    <!--
+      The calligraphy stroke is built as a filled teardrop/leaf shape.
+      Thick at base (bottom-left), tapering to a sharp tip (top-right).
+      The curve follows the trajectory of a 撇 stroke blended with tone-mark rise.
+    -->
+  </defs>
+
+  <!-- Canvas background: 宣纸白 -->
+  <rect width="1024" height="1024" fill="#F6F1E6"/>
+
+  <!--
+    Main brush stroke.
+    A carefully crafted filled path that simulates variable-width brush pressure:
+    - Bottom-left (x≈210, y≈680): wide base — brush pressed firmly on paper
+    - Sweeps up-right through center, thinning gradually
+    - Top-right (x≈800, y≈340): sharp tip — brush lifted off paper
+    The S-curve of the top edge gives it a tone-mark-like quality (rising ˊ tone).
+  -->
+  <path d="M 210,680
+           C 320,640 420,560 512,480
+           C 640,380 740,340 810,320
+           C 780,340 720,370 640,420
+           C 540,480 440,560 340,610
+           C 280,640 230,660 210,680 Z"
+        fill="#141414"/>
+
+  <!--
+    Vermillion seal stamp (bottom-right area).
+    Traditional Chinese seal aesthetic — circular, minimalist.
+    The outer ring + smaller filled circle evoke a 印章 (chop seal).
+  -->
+  <g transform="translate(700, 640)">
+    <!-- Outer seal ring -->
+    <circle cx="0" cy="0" r="38" fill="none" stroke="#D93A2E" stroke-width="5"/>
+    <!-- Inner seal mark (small filled circle) -->
+    <circle cx="0" cy="0" r="9" fill="#D93A2E"/>
+  </g>
+
+</svg>

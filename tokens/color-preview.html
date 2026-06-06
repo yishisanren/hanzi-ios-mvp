@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>声笔 ToneStroke — 色彩令牌预览</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, "PingFang SC", "SF Pro Text", system-ui, sans-serif;
+    background: var(--bg-primary);
+    color: var(--ink-primary);
+    transition: background 0.3s ease, color 0.3s ease;
+    padding: 32px 24px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* ---- Header -------------------------------------------- */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--stroke-divider);
+  }
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: var(--ink-tertiary);
+    margin-top: 4px;
+  }
+
+  /* ---- Theme Toggle -------------------------------------- */
+  .theme-toggle {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 3px;
+  }
+  .theme-toggle button {
+    border: none;
+    background: transparent;
+    color: var(--ink-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 17px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .theme-toggle button.active {
+    background: var(--accent-primary);
+    color: #FFFFFF;
+  }
+
+  /* ---- Section ------------------------------------------- */
+  .section {
+    margin-bottom: 32px;
+  }
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-secondary);
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ---- Token Grid ---------------------------------------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  .token-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: background 0.3s ease;
+  }
+
+  .token-swatch {
+    height: 80px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 6px 8px;
+  }
+
+  /* Show hex on colored swatches */
+  .token-swatch .hex-overlay {
+    font-size: 11px;
+    font-weight: 600;
+    font-family: "SF Mono", "Menlo", monospace;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(0,0,0,0.15);
+    backdrop-filter: blur(4px);
+    color: #fff;
+  }
+
+  .token-swatch.dark-hex .hex-overlay {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+  }
+
+  .token-swatch.light-hex .hex-overlay {
+    background: rgba(0,0,0,0.08);
+    color: var(--ink-primary);
+  }
+
+  .token-info {
+    padding: 10px 10px 12px;
+  }
+  .token-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-primary);
+    font-family: "SF Mono", "Menlo", monospace;
+  }
+  .token-usage {
+    font-size: 11px;
+    color: var(--ink-tertiary);
+    margin-top: 2px;
+  }
+
+  /* ---- Special badge ------------------------------------- */
+  .badge-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .badge-accent {
+    background: var(--accent-primary);
+    color: #FFFFFF;
+  }
+  .badge-outline {
+    border: 1.5px solid var(--accent-primary);
+    color: var(--accent-primary);
+    background: transparent;
+  }
+  .badge-success {
+    background: var(--state-success);
+    color: #FFFFFF;
+  }
+  .badge-error {
+    background: var(--state-error);
+    color: #FFFFFF;
+  }
+
+  /* ---- Accessibility Note -------------------------------- */
+  .a11y-note {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    border-left: 4px solid var(--state-success);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-secondary);
+  }
+  .a11y-note strong { color: var(--ink-primary); }
+
+  /* ---- Contrast Matrix -------------------------------- */
+  .matrix {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 12px;
+  }
+  .matrix th, .matrix td {
+    padding: 6px 8px;
+    text-align: center;
+    border: 1px solid var(--stroke-divider);
+  }
+  .matrix th {
+    background: var(--bg-tertiary);
+    font-weight: 600;
+    color: var(--ink-secondary);
+  }
+  .matrix td {
+    color: var(--ink-primary);
+  }
+  .pass-aa { color: var(--state-success); font-weight: 600; }
+  .pass-lg { color: var(--state-warning); font-weight: 600; }
+  .fail    { color: var(--state-error); font-weight: 600; }
+
+  /* ---- Responsive ---------------------------------------- */
+  @media (max-width: 600px) {
+    body { padding: 16px 12px; }
+    header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>🖌️ ToneStroke</h1>
+    <div class="subtitle">色彩令牌预览 · Light / Dark 双模式</div>
+  </div>
+  <div class="theme-toggle" id="themeToggle">
+    <button class="active" data-theme="light">☀️ Light</button>
+    <button data-theme="dark">🌙 Dark</button>
+  </div>
+</header>
+
+<!-- ==================== BACKGROUNDS ==================== -->
+<section class="section">
+  <div class="section-title">Backgrounds</div>
+  <div class="grid">
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--bg-primary);">
+        <span class="hex-overlay" id="hex-bg-primary">#F6F1E6</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--bg-primary</div>
+        <div class="token-usage">主背景</div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--bg-secondary);">
+        <span class="hex-overlay" id="hex-bg-secondary">#EEE8DA</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--bg-secondary</div>
+        <div class="token-usage">卡片 / 列表底</div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--bg-tertiary);">
+        <span class="hex-overlay" id="hex-bg-tertiary">#E5DDCB</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--bg-tertiary</div>
+        <div class="token-usage">输入框 / 练习格底</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== INK ==================== -->
+<section class="section">
+  <div class="section-title">Ink（文字层）</div>
+  <div class="grid">
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--ink-primary);">
+        <span class="hex-overlay" id="hex-ink-primary">#141414</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--ink-primary</div>
+        <div class="token-usage">正文 / 汉字主体</div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--ink-secondary);">
+        <span class="hex-overlay" id="hex-ink-secondary">#55504B</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--ink-secondary</div>
+        <div class="token-usage">次级文字 / 拼音</div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--ink-tertiary);">
+        <span class="hex-overlay" id="hex-ink-tertiary">#7E766D</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--ink-tertiary</div>
+        <div class="token-usage">占位符 / 提示</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ACCENT ==================== -->
+<section class="section">
+  <div class="section-title">Accent（强调色）</div>
+  <div class="grid">
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--accent-primary);">
+        <span class="hex-overlay" id="hex-accent-primary">#D93A2E</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--accent-primary</div>
+        <div class="token-usage">朱砂红 · 主行动 / 声调 / 当前笔画</div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--accent-hover);">
+        <span class="hex-overlay" id="hex-accent-hover">#C43328</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--accent-hover</div>
+        <div class="token-usage">hover / 高亮态</div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--accent-pressed);">
+        <span class="hex-overlay" id="hex-accent-pressed">#AD2C22</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--accent-pressed</div>
+        <div class="token-usage">按下态</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Badge examples -->
+  <div class="badge-row">
+    <span class="badge badge-accent">主按钮</span>
+    <span class="badge badge-outline">描边按钮</span>
+    <span class="badge badge-success">✓ 完成</span>
+    <span class="badge badge-error">✗ 错误</span>
+  </div>
+</section>
+
+<!-- ==================== STROKE ==================== -->
+<section class="section">
+  <div class="section-title">Stroke（线条 / 网格）</div>
+  <div class="grid">
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--stroke-grid);">
+        <span class="hex-overlay" id="hex-stroke-grid">#C8C0B6</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--stroke-grid</div>
+        <div class="token-usage">练习格线</div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--stroke-grid-accent);">
+        <span class="hex-overlay" id="hex-stroke-grid-accent">#D93A2E</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--stroke-grid-accent</div>
+        <div class="token-usage">当前练习格高亮</div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--stroke-divider);">
+        <span class="hex-overlay" id="hex-stroke-divider">#E0DAD0</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--stroke-divider</div>
+        <div class="token-usage">分隔线</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== STATE ==================== -->
+<section class="section">
+  <div class="section-title">State（状态反馈）</div>
+  <div class="grid">
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--state-success);">
+        <span class="hex-overlay" id="hex-state-success">#588157</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--state-success</div>
+        <div class="token-usage">练习完成 / 正确</div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--state-warning);">
+        <span class="hex-overlay" id="hex-state-warning">#A86532</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--state-warning</div>
+        <div class="token-usage">提示</div>
+      </div>
+    </div>
+    <div class="token-card">
+      <div class="token-swatch" style="background: var(--state-error);">
+        <span class="hex-overlay" id="hex-state-error">#C62828</span>
+      </div>
+      <div class="token-info">
+        <div class="token-name">--state-error</div>
+        <div class="token-usage">错误笔画 / 输入错误</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ACCESSIBILITY ==================== -->
+<section class="section">
+  <div class="section-title">Accessibility · WCAG AA 对比度验证</div>
+
+  <div class="a11y-note">
+    <strong>✅ 白字 (#FFFFFF) 在朱砂红 (#D93A2E) 按钮上：4.57:1 — AA 正文通过</strong><br>
+    <strong>✅ 朱砂红 (#D93A2E) 在宣纸白 (#F6F1E6) 上：4.06:1 — AA 大字号通过</strong><br>
+    ✅ 所有文字 token 在全背景层上至少通过 AA 大字号标准（≥3:1）<br>
+    ✅ ink-primary / ink-secondary 在所有背景上通过 AA 正文标准（≥4.5:1）<br>
+    ⚠️ ink-tertiary / accent-primary / state-* 为装饰/状态用途，满足大字号 AA 标准
+  </div>
+
+  <table class="matrix" id="contrastMatrix">
+    <thead>
+      <tr>
+        <th>文字 \ 背景</th>
+        <th bg-primary>bg-primary</th>
+        <th bg-secondary>bg-secondary</th>
+        <th bg-tertiary>bg-tertiary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>ink-primary</strong></td>
+        <td class="pass-aa">16.36:1 AA</td>
+        <td class="pass-aa">15.08:1 AA</td>
+        <td class="pass-aa">13.63:1 AA</td>
+      </tr>
+      <tr>
+        <td><strong>ink-secondary</strong></td>
+        <td class="pass-aa">7.07:1 AA</td>
+        <td class="pass-aa">6.52:1 AA</td>
+        <td class="pass-aa">5.90:1 AA</td>
+      </tr>
+      <tr>
+        <td><strong>ink-tertiary</strong></td>
+        <td class="pass-lg">3.97:1 LG</td>
+        <td class="pass-lg">3.66:1 LG</td>
+        <td class="pass-lg">3.31:1 LG</td>
+      </tr>
+      <tr>
+        <td><strong>accent-primary</strong></td>
+        <td class="pass-lg">4.06:1 LG</td>
+        <td class="pass-lg">3.74:1 LG</td>
+        <td class="pass-lg">3.38:1 LG</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<script>
+  // ---- Theme Toggle ----------------------------------------
+  const buttons = document.querySelectorAll('#themeToggle button');
+  const root = document.documentElement;
+
+  // Hex values for each mode
+  const hexValues = {
+    light: {
+      'hex-bg-primary': '#F6F1E6',
+      'hex-bg-secondary': '#EEE8DA',
+      'hex-bg-tertiary': '#E5DDCB',
+      'hex-ink-primary': '#141414',
+      'hex-ink-secondary': '#55504B',
+      'hex-ink-tertiary': '#7E766D',
+      'hex-accent-primary': '#D93A2E',
+      'hex-accent-hover': '#C43328',
+      'hex-accent-pressed': '#AD2C22',
+      'hex-stroke-grid': '#C8C0B6',
+      'hex-stroke-grid-accent': '#D93A2E',
+      'hex-stroke-divider': '#E0DAD0',
+      'hex-state-success': '#588157',
+      'hex-state-warning': '#A86532',
+      'hex-state-error': '#C62828',
+    },
+    dark: {
+      'hex-bg-primary': '#1A1A1A',
+      'hex-bg-secondary': '#242424',
+      'hex-bg-tertiary': '#2C2C2C',
+      'hex-ink-primary': '#F6F1E6',
+      'hex-ink-secondary': '#C8C0B6',
+      'hex-ink-tertiary': '#8A8278',
+      'hex-accent-primary': '#D93A2E',
+      'hex-accent-hover': '#E54A3E',
+      'hex-accent-pressed': '#BF2E22',
+      'hex-stroke-grid': '#5C5550',
+      'hex-stroke-grid-accent': '#D93A2E',
+      'hex-stroke-divider': '#3A3530',
+      'hex-state-success': '#6AAF6A',
+      'hex-state-warning': '#E0A060',
+      'hex-state-error': '#EF5350',
+    },
+  };
+
+  function setTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    buttons.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.theme === theme);
+    });
+    // Update hex overlays
+    const hexData = hexValues[theme];
+    for (const [id, hex] of Object.entries(hexData)) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = hex;
+    }
+    // Update contrast matrix for dark mode
+    updateMatrix(theme);
+  }
+
+  function updateMatrix(theme) {
+    const isDark = theme === 'dark';
+    const matrix = document.getElementById('contrastMatrix');
+    const rows = matrix.querySelectorAll('tbody tr');
+    // Dark mode values
+    const darkMatrix = {
+      0: ['15.45:1', '13.78:1', '12.40:1'],  // ink-primary
+      1: ['9.67:1', '8.63:1', '7.76:1'],     // ink-secondary
+      2: ['4.60:1', '4.10:1', '3.69:1'],     // ink-tertiary
+      3: ['3.81:1', '3.40:1', '3.06:1'],     // accent-primary
+    };
+    const lightMatrix = {
+      0: ['16.36:1', '15.08:1', '13.63:1'],
+      1: ['7.07:1', '6.52:1', '5.90:1'],
+      2: ['3.97:1', '3.66:1', '3.31:1'],
+      3: ['4.06:1', '3.74:1', '3.38:1'],
+    };
+    const data = isDark ? darkMatrix : lightMatrix;
+    rows.forEach((row, ri) => {
+      const cells = row.querySelectorAll('td');
+      cells.forEach((cell, ci) => {
+        if (ci < 3) {
+          const val = data[ri][ci];
+          const num = parseFloat(val);
+          cell.textContent = val + (num >= 4.5 ? ' AA' : num >= 3.0 ? ' LG' : '');
+          cell.className = num >= 4.5 ? 'pass-aa' : num >= 3.0 ? 'pass-lg' : 'fail';
+        }
+      });
+    });
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => setTheme(btn.dataset.theme));
+  });
+
+  // ---- Respect system preference on load -------------------
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  setTheme(prefersDark ? 'dark' : 'light');
+
+  // Listen for system changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    setTheme(e.matches ? 'dark' : 'light');
+  });
+</script>
+
+</body>
+</html>

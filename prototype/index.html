@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>声笔 ToneStroke · 原型导航</title>
+<link rel="stylesheet" href="assets/css/tokens.css">
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", sans-serif;
+    background: var(--bg-primary);
+    color: var(--ink-primary);
+    margin: 0;
+    padding: 40px 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  header { margin-bottom: 32px; }
+  h1 { font-size: 32px; margin: 0 0 4px; font-weight: 600; letter-spacing: 0.5px; }
+  h1 .en { color: var(--ink-tertiary); font-size: 18px; font-weight: 400; margin-left: 8px; }
+  .subtitle { color: var(--ink-tertiary); font-size: 14px; }
+  .nav-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  @media (min-width: 600px) {
+    .nav-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .nav-card {
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    padding: 22px 22px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: 1px solid var(--stroke-divider);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .nav-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+    border-color: var(--accent-primary);
+  }
+  .nav-card .tag {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--accent-primary);
+    background: var(--bg-primary);
+    padding: 3px 8px;
+    border-radius: 4px;
+    align-self: flex-start;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .nav-card h3 {
+    margin: 0 0 4px;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .nav-card p {
+    margin: 0;
+    color: var(--ink-secondary);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .meta {
+    margin-top: 36px;
+    padding: 18px 20px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    font-size: 13px;
+    color: var(--ink-secondary);
+    line-height: 1.7;
+  }
+  .meta strong { color: var(--ink-primary); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>声笔<span class="en">ToneStroke</span></h1>
+    <div class="subtitle">汉字拼音 + 笔顺学习 iOS App · MVP 原型导航 · 2026-06-06</div>
+  </header>
+
+  <div class="nav-grid">
+    <a class="nav-card" href="screens/home.html">
+      <span class="tag">📱 高保真原型</span>
+      <h3>主页面 Demo</h3>
+      <p>iPhone 14 Pro 尺寸高保真 mockup。输入框 C 位 + 语音入口 + 笔顺练习格 + 最近练习。</p>
+    </a>
+    <a class="nav-card" href="screens/logo-compare.html">
+      <span class="tag">🎨 待拍板</span>
+      <h3>Logo 4 方向对比</h3>
+      <p>A 声调格 / B 撇笔弧线 / C TS 交织 / D 声点标。带 1024 + 180 + 60 三档预览 + 评分 + 推荐排序。</p>
+    </a>
+    <a class="nav-card" href="../tokens/color-preview.html">
+      <span class="tag">🎨 已锁定</span>
+      <h3>色板系统预览</h3>
+      <p>Light/Dark 双模式 16 token 完整色板。含 WCAG AA 对比度验证。</p>
+    </a>
+    <a class="nav-card" href="../COLOR-SYSTEM.md">
+      <span class="tag">📄 文档</span>
+      <h3>色板系统文档</h3>
+      <p>命名规范、使用规则、对比度矩阵、Don'ts 清单。可直接给 Mac 端 Claude Code 工程师参考。</p>
+    </a>
+    <a class="nav-card" href="../logos-v2/LOGO-EXPLORATION.md">
+      <span class="tag">📄 文档</span>
+      <h3>Logo 设计说明</h3>
+      <p>4 方向设计矩阵、每个方向的设计理由、推荐排序、综合评分。</p>
+    </a>
+    <a class="nav-card" href="../PRD.md">
+      <span class="tag">📄 文档</span>
+      <h3>PRD v2</h3>
+      <p>完整产品需求文档。v2 修复了 v1 的信息架构 / 离线策略 / 拼音方案矛盾。</p>
+    </a>
+  </div>
+
+  <div class="meta">
+    <strong>当前进度</strong>：色板系统 ✓ 已交付 · Logo 4 方向 ⏳ 待拍板 · 主页面 demo ✓ 完成（用 A 做占位 logo） · iOS 工程 ⏸ 等 logo 锁定后进入 M1
+    <br>
+    <strong>下一步建议</strong>：① 在 logo 对比页选定方向 ② 决定是否在 A 基础上加细虚线笔顺路径 ③ 进入 PRD §9 M0 资源整理
+  </div>
+</div>
+</body>
+</html>

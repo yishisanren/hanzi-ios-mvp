@@ -1,0 +1,126 @@
+/* ============================================================
+   声笔 ToneStroke — 色彩令牌 CSS
+   CSS Custom Properties for Light & Dark Modes
+   
+   Usage:
+     1. Include this stylesheet
+     2. Light mode is default (no data-theme needed)
+     3. Dark mode activates via:
+        a) @media (prefers-color-scheme: dark)  —  follow system
+        b) [data-theme="dark"]                  —  manual toggle
+   
+   Version: v1.0  |  2026-06-06
+   ============================================================ */
+
+/* ---- Root / Light Mode (default) --------------------------- */
+:root,
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-primary:          #F6F1E6;
+  --bg-secondary:        #EEE8DA;
+  --bg-tertiary:         #E5DDCB;
+
+  /* Ink (text) */
+  --ink-primary:         #141414;
+  --ink-secondary:       #55504B;
+  --ink-tertiary:        #7E766D;
+
+  /* Accent (actions, tones, current stroke) */
+  --accent-primary:      #D93A2E;
+  --accent-hover:        #C43328;
+  --accent-pressed:      #AD2C22;
+
+  /* Strokes & dividers */
+  --stroke-grid:         #C8C0B6;
+  --stroke-grid-accent:  #D93A2E;
+  --stroke-divider:      #E0DAD0;
+
+  /* States (practice feedback) */
+  --state-success:       #588157;
+  --state-warning:       #A86532;
+  --state-error:         #C62828;
+
+  /* Shadows */
+  --shadow-card:         0 2px 8px rgba(20, 20, 20, 0.08);
+  --shadow-modal:        0 8px 32px rgba(20, 20, 20, 0.16);
+}
+
+/* ---- Dark Mode — follow system preference ------------------ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Backgrounds */
+    --bg-primary:          #1A1A1A;
+    --bg-secondary:        #242424;
+    --bg-tertiary:         #2C2C2C;
+
+    /* Ink (text) */
+    --ink-primary:         #F6F1E6;
+    --ink-secondary:       #C8C0B6;
+    --ink-tertiary:        #8A8278;
+
+    /* Accent (朱砂红 unchanged in dark mode) */
+    --accent-primary:      #D93A2E;
+    --accent-hover:        #E54A3E;  /* lighter on dark bg */
+    --accent-pressed:      #BF2E22;
+
+    /* Strokes & dividers */
+    --stroke-grid:         #5C5550;
+    --stroke-grid-accent:  #D93A2E;
+    --stroke-divider:      #3A3530;
+
+    /* States */
+    --state-success:       #6AAF6A;
+    --state-warning:       #E0A060;
+    --state-error:         #EF5350;
+
+    /* Shadows */
+    --shadow-card:         0 2px 8px rgba(0, 0, 0, 0.40);
+    --shadow-modal:        0 8px 32px rgba(0, 0, 0, 0.60);
+  }
+}
+
+/* ---- Dark Mode — manual toggle via data-theme -------------- */
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-primary:          #1A1A1A;
+  --bg-secondary:        #242424;
+  --bg-tertiary:         #2C2C2C;
+
+  /* Ink (text) */
+  --ink-primary:         #F6F1E6;
+  --ink-secondary:       #C8C0B6;
+  --ink-tertiary:        #8A8278;
+
+  /* Accent */
+  --accent-primary:      #D93A2E;
+  --accent-hover:        #E54A3E;
+  --accent-pressed:      #BF2E22;
+
+  /* Strokes & dividers */
+  --stroke-grid:         #5C5550;
+  --stroke-grid-accent:  #D93A2E;
+  --stroke-divider:      #3A3530;
+
+  /* States */
+  --state-success:       #6AAF6A;
+  --state-warning:       #E0A060;
+  --state-error:         #EF5350;
+
+  /* Shadows */
+  --shadow-card:         0 2px 8px rgba(0, 0, 0, 0.40);
+  --shadow-modal:        0 8px 32px rgba(0, 0, 0, 0.60);
+}
+
+/* ---- Utility classes for rapid prototyping ----------------- */
+.bg-primary   { background: var(--bg-primary); }
+.bg-secondary { background: var(--bg-secondary); }
+.bg-tertiary  { background: var(--bg-tertiary); }
+
+.ink-primary   { color: var(--ink-primary); }
+.ink-secondary { color: var(--ink-secondary); }
+.ink-tertiary  { color: var(--ink-tertiary); }
+
+.accent-primary { color: var(--accent-primary); }
+.state-success  { color: var(--state-success); }
+.state-warning  { color: var(--state-warning); }
+.state-error    { color: var(--state-error); }

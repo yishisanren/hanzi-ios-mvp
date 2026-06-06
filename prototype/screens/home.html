@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>声笔 ToneStroke · 主页</title>
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/iphone-frame.css">
+<style>
+  /* ---------- 主页面专属样式 ---------- */
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Helvetica Neue", sans-serif;
+    background: var(--bg-primary);
+    color: var(--ink-primary);
+    margin: 0;
+  }
+  .home {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  /* ---- 顶部 brand bar ---- */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0 12px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 7px;
+    background: var(--ink-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .brand-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .brand-name {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .brand-name .en {
+    color: var(--ink-tertiary);
+    font-weight: 400;
+    margin-left: 4px;
+    font-size: 13px;
+  }
+  .topbar-actions {
+    display: flex;
+    gap: 14px;
+  }
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-secondary);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .icon-btn:hover { background: var(--bg-secondary); }
+  .icon-btn svg { width: 20px; height: 20px; }
+
+  /* ---- 输入区（C 位） ---- */
+  .input-section {
+    margin-top: 8px;
+    margin-bottom: 4px;
+  }
+  .input-label {
+    font-size: 13px;
+    color: var(--ink-tertiary);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  .input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--bg-secondary);
+    border: 1.5px solid var(--stroke-divider);
+    border-radius: 14px;
+    padding: 14px 14px 14px 18px;
+    transition: border-color 0.2s;
+  }
+  .input-wrap:focus-within {
+    border-color: var(--accent-primary);
+  }
+  .input-wrap input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 22px;
+    color: var(--ink-primary);
+    font-family: inherit;
+    min-width: 0;
+    letter-spacing: 1px;
+  }
+  .input-wrap input::placeholder {
+    color: var(--ink-tertiary);
+    font-size: 18px;
+    letter-spacing: 0.5px;
+  }
+  .mic-btn {
+    flex-shrink: 0;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .mic-btn:hover { background: var(--accent-hover); }
+  .mic-btn:active { background: var(--accent-pressed); }
+  .mic-btn svg { width: 18px; height: 18px; color: white; }
+  .input-hint {
+    font-size: 12px;
+    color: var(--ink-tertiary);
+    margin-top: 10px;
+    text-align: center;
+  }
+  .input-hint .dot { color: var(--accent-primary); }
+  .input-hint strong { color: var(--ink-secondary); font-weight: 500; }
+
+  /* ---- 学习状态区 ---- */
+  .learn-section {
+    margin-top: 22px;
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .learn-card {
+    background: var(--bg-secondary);
+    border-radius: 18px;
+    padding: 20px 18px 18px;
+    box-shadow: var(--shadow-card);
+  }
+  .learn-meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .pinyin-display {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .pinyin-main {
+    font-size: 26px;
+    color: var(--accent-primary);
+    font-weight: 500;
+    letter-spacing: 1.5px;
+  }
+  .pinyin-alt {
+    font-size: 12px;
+    color: var(--ink-tertiary);
+  }
+  .pinyin-alt strong {
+    color: var(--ink-secondary);
+    font-weight: 500;
+  }
+  .fav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--ink-tertiary);
+    transition: color 0.15s;
+  }
+  .fav-btn.active { color: var(--accent-primary); }
+  .fav-btn svg { width: 22px; height: 22px; }
+
+  /* ---- 笔顺练习格 ---- */
+  .stroke-grid-wrap {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 4px 0 18px;
+  }
+  .stroke-cell {
+    width: 130px;
+    height: 130px;
+    background: var(--bg-primary);
+    border: 1.5px solid var(--stroke-divider);
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* 米字格虚线 */
+  .stroke-cell::before,
+  .stroke-cell::after {
+    content: "";
+    position: absolute;
+    background: var(--stroke-grid);
+    pointer-events: none;
+  }
+  .stroke-cell::before {
+    width: 1px;
+    height: calc(100% - 16px);
+    left: 50%;
+    top: 8px;
+    background-image: linear-gradient(to bottom, var(--stroke-grid) 50%, transparent 50%);
+    background-size: 1px 6px;
+    background-repeat: repeat-y;
+  }
+  .stroke-cell::after {
+    height: 1px;
+    width: calc(100% - 16px);
+    top: 50%;
+    left: 8px;
+    background-image: linear-gradient(to right, var(--stroke-grid) 50%, transparent 50%);
+    background-size: 6px 1px;
+    background-repeat: repeat-x;
+  }
+  /* 米字格对角线（用伪元素的边框 trick） */
+  .stroke-cell .diag {
+    position: absolute;
+    inset: 8px;
+    pointer-events: none;
+  }
+  .stroke-cell .diag::before,
+  .stroke-cell .diag::after {
+    content: "";
+    position: absolute;
+    background: var(--stroke-grid);
+    width: 1px;
+    height: 141%;
+    top: -20%;
+    left: 50%;
+    background-image: linear-gradient(to bottom, var(--stroke-grid) 50%, transparent 50%);
+    background-size: 1px 6px;
+    background-repeat: repeat-y;
+  }
+  .stroke-cell .diag::before { transform: rotate(45deg); transform-origin: center; }
+  .stroke-cell .diag::after  { transform: rotate(-45deg); transform-origin: center; }
+  /* 当前笔画演示 */
+  .hanzi-display {
+    font-size: 96px;
+    color: var(--ink-primary);
+    font-family: "Songti SC", "STSong", serif;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+    line-height: 1;
+  }
+  .hanzi-display .current-stroke {
+    color: var(--accent-primary);
+  }
+
+  /* ---- 操作按钮组 ---- */
+  .action-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .btn {
+    flex: 1;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 0;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+    letter-spacing: 0.5px;
+  }
+  .btn-primary {
+    background: var(--accent-primary);
+    color: white;
+    flex: 1.4;
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-primary:active { background: var(--accent-pressed); }
+  .btn-secondary {
+    background: var(--bg-primary);
+    color: var(--ink-secondary);
+    border: 1px solid var(--stroke-divider);
+  }
+  .btn-secondary:hover { background: var(--bg-tertiary); }
+
+  /* ---- 最近 / 收藏 快捷区 ---- */
+  .quick-section {
+    margin-top: 22px;
+    padding-bottom: 24px;
+  }
+  .quick-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .quick-title h3 {
+    font-size: 13px;
+    color: var(--ink-tertiary);
+    margin: 0;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .quick-title a {
+    font-size: 12px;
+    color: var(--ink-tertiary);
+    text-decoration: none;
+  }
+  .recent-list {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -20px;
+    padding: 4px 20px 8px;
+    scrollbar-width: none;
+  }
+  .recent-list::-webkit-scrollbar { display: none; }
+  .recent-chip {
+    flex-shrink: 0;
+    min-width: 64px;
+    height: 64px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .recent-chip:hover { background: var(--bg-tertiary); }
+  .recent-chip .h {
+    font-size: 24px;
+    color: var(--ink-primary);
+    font-family: "Songti SC", "STSong", serif;
+    line-height: 1;
+  }
+  .recent-chip .p {
+    font-size: 10px;
+    color: var(--ink-tertiary);
+    margin-top: 3px;
+  }
+</style>
+</head>
+<body>
+<div class="iphone-frame">
+  <div class="iphone-notch"></div>
+  <div class="iphone-statusbar">
+    <span class="time">9:41</span>
+    <span class="indicators" style="display:flex;align-items:center;gap:6px;">
+      <!-- 信号 -->
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" style="display:block;">
+        <rect x="0"  y="7" width="3" height="4" rx="0.5"/>
+        <rect x="4.5" y="5" width="3" height="6" rx="0.5"/>
+        <rect x="9" y="3" width="3" height="8" rx="0.5"/>
+        <rect x="13.5" y="0" width="3" height="11" rx="0.5"/>
+      </svg>
+      <!-- WiFi -->
+      <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" style="display:block;">
+        <path d="M1 3.5 Q8 -1.5 15 3.5"/>
+        <path d="M3 6   Q8 2.5 13 6"/>
+        <path d="M5 8.5 Q8 6.5 11 8.5"/>
+        <circle cx="8" cy="10.5" r="0.7" fill="currentColor"/>
+      </svg>
+      <!-- 电池 -->
+      <svg width="26" height="12" viewBox="0 0 26 12" fill="none" style="display:block;">
+        <rect x="0.5" y="0.5" width="22" height="11" rx="2.5" stroke="currentColor" stroke-width="1" fill="none"/>
+        <rect x="2"   y="2"   width="19" height="8"  rx="1.2" fill="currentColor"/>
+        <rect x="23"  y="4"   width="1.8" height="4"  rx="0.6" fill="currentColor"/>
+      </svg>
+    </span>
+  </div>
+  <div class="iphone-screen">
+    <div class="home">
+      <!-- 顶部 -->
+      <div class="topbar">
+        <div class="brand">
+          <div class="brand-icon">
+            <img src="../assets/logo/app-icon.svg" alt="声笔">
+          </div>
+          <div class="brand-name">声笔<span class="en">ToneStroke</span></div>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-btn" aria-label="收藏">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+          </button>
+          <button class="icon-btn" aria-label="设置">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 输入区 -->
+      <div class="input-section">
+        <div class="input-label">输入汉字 · 1–4 字</div>
+        <div class="input-wrap">
+          <input type="text" placeholder="例如：学习" value="学习" inputmode="text">
+          <button class="mic-btn" aria-label="语音录入">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="22"/>
+            </svg>
+          </button>
+        </div>
+        <div class="input-hint"><span class="dot">●</span> 不方便打字？点麦克风说"<strong>张三的三</strong>"</div>
+      </div>
+
+      <!-- 学习状态 -->
+      <div class="learn-section">
+        <div class="learn-card">
+          <div class="learn-meta">
+            <div class="pinyin-display">
+              <span class="pinyin-main">xué xí</span>
+            </div>
+            <button class="fav-btn active" aria-label="收藏">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="stroke-grid-wrap">
+            <div class="stroke-cell">
+              <div class="diag"></div>
+              <div class="hanzi-display">学</div>
+            </div>
+            <div class="stroke-cell">
+              <div class="diag"></div>
+              <div class="hanzi-display">习</div>
+            </div>
+          </div>
+          <div class="action-group">
+            <button class="btn btn-primary">开始练习</button>
+            <button class="btn btn-secondary">播放</button>
+            <button class="btn btn-secondary">慢速</button>
+          </div>
+        </div>
+
+        <!-- 快捷区 -->
+        <div class="quick-section">
+          <div class="quick-title">
+            <h3>最近练习</h3>
+            <a href="#">全部 →</a>
+          </div>
+          <div class="recent-list">
+            <div class="recent-chip"><div class="h">爱</div><div class="p">ài</div></div>
+            <div class="recent-chip"><div class="h">中国</div><div class="p">zhōngguó</div></div>
+            <div class="recent-chip"><div class="h">行</div><div class="p">xíng</div></div>
+            <div class="recent-chip"><div class="h">永</div><div class="p">yǒng</div></div>
+            <div class="recent-chip"><div class="h">谢谢</div><div class="p">xièxie</div></div>
+            <div class="recent-chip"><div class="h">水</div><div class="p">shuǐ</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="iphone-home-indicator"></div>
+</div>
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

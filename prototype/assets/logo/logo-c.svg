@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!--
+    Direction C: T+S Tone Monogram (TS声调交织标)
+    Matrix: (复合符号, 现代科技感)
+    Meta at 60×60: the black T-stem (60px) and thick tone-mark crossbar (44px) hold solid shape;
+         red S-curve is the thinnest element (16px) but follows the stem closely, maintaining legibility.
+    Center element: geometric 'T' fused with tone-mark arc + flowing 'S' accent.
+  -->
+
+  <!-- Canvas background: 宣纸白 -->
+  <rect width="1024" height="1024" fill="#F6F1E6"/>
+
+  <!--
+    Element 1: T vertical stem.
+    A clean rounded rectangle — the anchor of the monogram.
+    Runs from upper-center down past midline.
+  -->
+  <rect x="462" y="320" width="100" height="440" rx="24" fill="#141414"/>
+
+  <!--
+    Element 2: Tone-mark crossbar.
+    A large ˇ (3rd tone) curve that functions simultaneously as:
+    (a) The horizontal crossbar of the letter 'T'
+    (b) The falling-rising tone mark
+    Sweeps from left to right, dipping below the stem's top.
+  -->
+  <path d="M 240,360 Q 512,580 784,360"
+        fill="none"
+        stroke="#141414"
+        stroke-width="48"
+        stroke-linecap="round"/>
+
+  <!--
+    Element 3: Red S-curve accent.
+    A flowing line hugging the lower part of the vertical stem.
+    Suggests the letter 'S' (for Stroke / 笔) and also reads as
+    a brush stroke's momentum. Adds the third dimension — motion.
+  -->
+  <path d="M 462,610
+           C 390,660 390,730 462,750
+           C 500,760 538,740 538,700"
+        fill="none"
+        stroke="#D93A2E"
+        stroke-width="16"
+        stroke-linecap="round"/>
+
+  <!--
+    Negative-space play: the junction between tone-mark and stem
+    creates a subtle gap that reads as a stylized 'S' silhouette
+    when viewed from a slight distance.
+  -->
+
+</svg>

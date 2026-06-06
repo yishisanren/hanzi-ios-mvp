@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!--
+    Direction A: Pinyin Tone Grid (声调格)
+    Matrix: (拼音字符, 教材规范感)
+    Meta at 60×60: thick tone mark stroke (36px) and four warm-gray grid lines remain visibly distinct.
+    Center element: the ˇ (falling-rising 3rd tone) mark dominates the frame.
+  -->
+  <defs>
+    <clipPath id="grid-clip">
+      <rect x="160" y="310" width="704" height="450"/>
+    </clipPath>
+  </defs>
+
+  <!-- Canvas background: 宣纸白 -->
+  <rect width="1024" height="1024" fill="#F6F1E6" rx="0"/>
+
+  <!--
+    Four-line pinyin grid (like 拼音本 exercise book).
+    Line 1 (top) and Line 4 (bottom) are thicker (3px) — "outer boundary" lines.
+    Line 2 and Line 3 are thinner (2px) — "inner guide" lines.
+  -->
+  <g stroke="#A8A099" stroke-linecap="round">
+    <!-- Top boundary line -->
+    <line x1="180" y1="370" x2="844" y2="370" stroke-width="3"/>
+    <!-- Upper guide line -->
+    <line x1="180" y1="470" x2="844" y2="470" stroke-width="2"/>
+    <!-- Lower guide line -->
+    <line x1="180" y1="570" x2="844" y2="570" stroke-width="2"/>
+    <!-- Bottom boundary line -->
+    <line x1="180" y1="670" x2="844" y2="670" stroke-width="3"/>
+  </g>
+
+  <!--
+    Tone mark ˇ (第三声 / falling-rising).
+    A smooth quadratic bezier: starts above line 2, dips below line 3, rises back up.
+    The Q path naturally creates the checkmark curve characteristic of ˇ.
+  -->
+  <path d="M 300,410 Q 512,640 724,410"
+        fill="none"
+        stroke="#141414"
+        stroke-width="38"
+        stroke-linecap="round"/>
+
+  <!--
+    Vermillion accent dot — top-right.
+    Like a teacher's correction stamp on pinyin homework,
+    or a red seal mark. Positioned outside the grid.
+  -->
+  <circle cx="790" cy="300" r="18" fill="#D93A2E"/>
+
+</svg>
