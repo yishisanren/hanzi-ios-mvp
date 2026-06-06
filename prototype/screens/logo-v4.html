@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会读会写 · Logo v4 · 拼音+汉字</title>
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;
+       background:var(--bg-primary);color:var(--ink-primary);margin:0;padding:32px 20px 60px;}
+  .container{max-width:900px;margin:0 auto;}
+  h1{font-size:28px;font-weight:600;margin:0 0 4px;letter-spacing:0.5px;}
+  .subtitle{color:var(--ink-tertiary);font-size:14px;margin-bottom:24px;}
+  .intro{background:var(--bg-secondary);border-left:3px solid var(--accent-primary);
+         padding:14px 18px;border-radius:8px;margin-bottom:32px;font-size:14px;line-height:1.7;color:var(--ink-secondary);}
+  .intro strong{color:var(--ink-primary);}
+  .hero{background:var(--bg-secondary);border-radius:18px;padding:30px;text-align:center;
+        box-shadow:var(--shadow-card);margin-bottom:24px;}
+  .hero .preview-1024{width:512px;max-width:100%;aspect-ratio:1;margin:0 auto 16px;
+                      background:var(--bg-primary);border-radius:14px;overflow:hidden;
+                      border:1px solid var(--stroke-divider);}
+  .hero .preview-1024 img{width:100%;height:100%;object-fit:contain;}
+  .sizes{display:flex;justify-content:center;gap:30px;margin-top:20px;}
+  .size-item{display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .size-item .img-box{background:var(--bg-tertiary);border-radius:12px;padding:8px;}
+  .size-item img{display:block;}
+  .size-item.s180 img{width:180px;height:180px;border-radius:24px;}
+  .size-item.s60 img{width:60px;height:60px;border-radius:12px;}
+  .size-item.s120 img{width:120px;height:120px;border-radius:18px;}
+  .size-item .lbl{font-size:12px;color:var(--ink-tertiary);letter-spacing:0.5px;}
+  .verdict{background:var(--bg-secondary);border-radius:14px;padding:20px 24px;margin-top:20px;
+           font-size:14px;line-height:1.7;color:var(--ink-secondary);}
+  .verdict h3{margin:0 0 10px;font-size:16px;color:var(--ink-primary);}
+  .verdict ul{margin:6px 0 0;padding-left:22px;}
+  .decision{margin-top:30px;padding:22px 24px;border:2px solid var(--accent-primary);
+            border-radius:16px;background:var(--bg-secondary);}
+  .decision h2{margin:0 0 12px;font-size:18px;}
+  .decision p{font-size:14px;line-height:1.7;color:var(--ink-secondary);margin:8px 0;}
+  .decision strong{color:var(--ink-primary);}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>会读会写 · Logo v4</h1>
+  <p class="subtitle">2026-06-06 · 拼音 + 汉字 上下结构（按用户新方向重做）</p>
+
+  <div class="intro">
+    <strong>设计思路</strong>：上层拼音「dú / xiě」+ 下层汉字「读 / 写」，构成"看到拼音、看到汉字"的功能直接展示。
+    <br><br>
+    <strong>朱砂红的功能性</strong>：拼音字母用墨黑，<strong>仅声调符号用朱砂红</strong>。朱砂红有了真正的功能意义——它标记"声调"，对应 App 内"当前笔画"的高亮色，品牌色和功能逻辑统一。
+    <br><br>
+    <strong>声调按拼音规范定位</strong>：dú 的 ˊ 在主元音 u 上方；xiě 的 ˇ 在主元音 e 上方（按 a&gt;o&gt;e&gt;i&gt;u 主元音规则）。
+    <br><br>
+    <strong>取舍</strong>：去掉米字格底纹（拼音+汉字双层结构已经够丰富，再加米字格会拥挤）；保留圆角外框（现代 iOS icon 风）。
+  </div>
+
+  <div class="hero">
+    <div class="preview-1024"><img src="../../logos-v4/logo-1024.png" alt="logo 1024"></div>
+    <div class="sizes">
+      <div class="size-item s180"><div class="img-box"><img src="../../logos-v4/logo-180.png"></div><span class="lbl">180px · 桌面 icon</span></div>
+      <div class="size-item s120"><div class="img-box"><img src="../../logos-v4/logo-180.png" style="width:120px;height:120px;"></div><span class="lbl">120px · 列表</span></div>
+      <div class="size-item s60"><div class="img-box"><img src="../../logos-v4/logo-60.png"></div><span class="lbl">60px · 通知</span></div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <h3>✓ 这版改进了什么</h3>
+    <ul>
+      <li>用拼音 + 汉字直接演示 App 核心功能（用户一眼看出"这是教读音和写字的工具"）</li>
+      <li>朱砂红从"装饰"变"功能色"（标记声调，呼应 App 内当前笔画高亮）</li>
+      <li>60px 极小尺寸下，拼音自然退化消失，汉字「读 写」仍清晰可识（adaptive 渐进退化策略）</li>
+      <li>避免了上一轮 3 个变体里"红色连接元素抢戏"的问题</li>
+    </ul>
+  </div>
+
+  <div class="decision">
+    <h2>🎯 你看这版怎么样？</h2>
+    <p><strong>满意 → 回复"锁定"</strong>，我会：</p>
+    <p>① 导出 13 尺寸完整 iOS AppIcon.appiconset<br>
+    ② 替换主页面 prototype 顶部的占位 logo<br>
+    ③ 写入 BRAND-DECISION.md 作为最终 logo<br>
+    ④ 进入 PRD §9 M0 资源整理阶段</p>
+    <p><strong>需要调整</strong>，告诉我具体方向：</p>
+    <ul style="font-size:14px;color:var(--ink-secondary);margin-top:8px;">
+      <li>拼音字号大小（"拼音再小一点" / "拼音再大一点"）</li>
+      <li>声调粗细（"声调再粗一点" / "弧度更夸张"）</li>
+      <li>圆角外框（"圆角再大" / "去掉外框")</li>
+      <li>颜色调整（"拼音也用朱砂红" / "汉字加阴影"）</li>
+      <li>结构调整（"拼音放右边、汉字放左边" / "加米字格回来"）</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

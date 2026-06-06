@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <style>
+      .pinyin { font-family: serif; font-size: 140px; font-weight: 600; fill: #141414; }
+      .hanzi { font-family: serif; font-size: 400px; font-weight: 800; fill: #141414; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1024" height="1024" rx="220" ry="220" fill="#F6F1E6"/>
+  <rect x="40" y="40" width="944" height="944" rx="200" ry="200"
+        fill="none" stroke="#141414" stroke-width="12"/>
+
+  <!-- ===== 左：dú + 读 ===== -->
+  <text class="pinyin" x="258" y="380" text-anchor="middle">d</text>
+  <text class="pinyin" x="338" y="380" text-anchor="middle">u</text>
+  <!-- 阳平 ˊ 居中在 u 上方 (x=338), 弧线 -->
+  <path d="M 312 290 Q 338 245 364 290"
+        fill="none" stroke="#D93A2E" stroke-width="18"
+        stroke-linecap="round"/>
+  <text class="hanzi" x="298" y="790" text-anchor="middle">读</text>
+
+  <!-- ===== 右：xiě + 写 ===== -->
+  <text class="pinyin" x="658" y="380" text-anchor="middle">x</text>
+  <text class="pinyin" x="728" y="380" text-anchor="middle">i</text>
+  <text class="pinyin" x="798" y="380" text-anchor="middle">e</text>
+  <!-- 上声 ˇ 居中在 e 上方 (x=798), 弧线 v 形 -->
+  <path d="M 772 250 Q 798 305 824 250"
+        fill="none" stroke="#D93A2E" stroke-width="18"
+        stroke-linecap="round"/>
+  <text class="hanzi" x="728" y="790" text-anchor="middle">写</text>
+</svg>
