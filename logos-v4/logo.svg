@@ -14,15 +14,12 @@
   <!-- ===== 左：dú + 读 ===== -->
   <text class="pinyin" x="258" y="380" text-anchor="middle">d</text>
   <text class="pinyin" x="338" y="380" text-anchor="middle">u</text>
-  <!-- 阳平 ˊ：左下→右上的斜线（正确形态） -->
-  <line x1="318" y1="280" x2="358" y2="225"
+  <!-- 阳平 ˊ：斜线 (316,270) → (361,223)，跨度 45×47，总长 ~65 -->
+  <line x1="316" y1="270" x2="361" y2="223"
         stroke="#D93A2E" stroke-width="20" stroke-linecap="round"/>
 
-  <!-- 左侧米字格（仅汉字区，y=480~890） -->
   <g stroke="#A8A099" stroke-width="2.5" stroke-dasharray="8 10" opacity="0.55">
-    <!-- 外框（细方框） -->
     <rect x="100" y="480" width="396" height="396" fill="none" stroke="#A8A099" stroke-width="2" stroke-dasharray="0"/>
-    <!-- 米字内线 -->
     <line x1="298" y1="480" x2="298" y2="876"/>
     <line x1="100" y1="678" x2="496" y2="678"/>
     <line x1="100" y1="480" x2="496" y2="876"/>
@@ -34,12 +31,11 @@
   <text class="pinyin" x="658" y="380" text-anchor="middle">x</text>
   <text class="pinyin" x="728" y="380" text-anchor="middle">i</text>
   <text class="pinyin" x="798" y="380" text-anchor="middle">e</text>
-  <!-- 上声 ˇ：弧形 v -->
-  <path d="M 772 250 Q 798 305 824 250"
+  <!-- 上声 ˇ：弧形 -->
+  <path d="M 774 250 Q 798 300 822 250"
         fill="none" stroke="#D93A2E" stroke-width="20"
         stroke-linecap="round"/>
 
-  <!-- 右侧米字格 -->
   <g stroke="#A8A099" stroke-width="2.5" stroke-dasharray="8 10" opacity="0.55">
     <rect x="540" y="480" width="396" height="396" fill="none" stroke="#A8A099" stroke-width="2" stroke-dasharray="0"/>
     <line x1="738" y1="480" x2="738" y2="876"/>
