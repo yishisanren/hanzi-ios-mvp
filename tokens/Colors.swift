@@ -1,5 +1,5 @@
 // ============================================================
-//  声笔 ToneStroke — 色彩令牌 SwiftUI Color 扩展
+//  会读会写 Read & Write — 色彩令牌 SwiftUI Color 扩展
 //  SwiftUI Color Extensions with Light/Dark dynamic support
 //
 //  Requirements: iOS 17+, Swift 5.9+

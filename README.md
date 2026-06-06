@@ -1,4 +1,4 @@
-# 声笔 Hanzi iOS MVP
+# 会读会写 Read & Write — 汉字 iOS MVP
 
 - [[PRD]]
 - 本地工程：`/Users/zhangweiwei/CodePolit/hanzi/ios/Hanzi.xcodeproj`
