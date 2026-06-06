@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <rect x="0" y="0" width="1024" height="1024" rx="220" ry="220" fill="#F6F1E6"/>
+  <rect x="40" y="40" width="944" height="944" rx="200" ry="200"
+        fill="none" stroke="#141414" stroke-width="12"/>
+  <g stroke="#8A8278" stroke-width="3" stroke-dasharray="10 12" opacity="0.55">
+    <line x1="512" y1="100" x2="512" y2="924"/>
+    <line x1="100" y1="512" x2="924" y2="512"/>
+    <line x1="160" y1="160" x2="864" y2="864"/>
+    <line x1="864" y1="160" x2="160" y2="864"/>
+  </g>
+  <text x="288" y="635" font-family="serif" font-size="420" font-weight="800"
+        fill="#141414" text-anchor="middle">读</text>
+  <text x="736" y="635" font-family="serif" font-size="420" font-weight="800"
+        fill="#141414" text-anchor="middle">写</text>
+  <path d="M 462 560 L 562 440"
+        stroke="#D93A2E" stroke-width="34"
+        stroke-linecap="round"/>
+</svg>
